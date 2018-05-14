@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -42,7 +44,7 @@ public class gestionAgenda {
         int opc;
         do {
             System.out.print("\n***GESTOR AGENDA***\n" + "1.Mostrar Contactos\n" + "2.Añadir Contacto\n" + "3.Editar Contacto\n"
-                  + "4.Consultar Contacto\n"  + "5.Eliminar Contacto\n" + "6.Ordenar Agenda\n" + "7.Buscar Cumpleaños\n" + "8.Salir\n" 
+                    + "4.Consultar Contacto\n" + "5.Eliminar Contacto\n" + "6.Ordenar Agenda\n" + "7.Buscar Cumpleaños\n" + "8.Salir\n"
                     + "Elige una opción: ");
             opc = Integer.parseInt(tc.readLine());
             validate(opc);
@@ -159,40 +161,108 @@ public class gestionAgenda {
             System.out.println("Error al añadir el nuevo contacto");
         }
     }
-    
-    public void edit_contact(){
+
+    public void edit_contact() {
         try {
             System.out.println("\nIntroduce el ID del contacto que quieres editar: ");
             String id = tc.readLine();
-            int cont = 0;
-            
+            int cont = 0, pos = 0;
+
             for (int i = 0; i < agenda.size(); i++) {
                 if (agenda.get(i).getId().equalsIgnoreCase(id)) {
-                    System.out.println(agenda.get(i));
                     cont++;
+                    pos = i;
                 }
             }
-            
+
             switch (cont) {
                 case 0:
                     System.out.println("\nID no encontrado");
                     edit_contact();
                     break;
+
                 case 1:
-                    
+                    System.out.println("\nVas a editar este contacto: " + "\n" + agenda.get(pos).toString());
+                    int opc;
+                    do {
+                        System.out.println("\nElija el campo a editar: " + "\n1.ID" + "\n2.Nombre" + "\n3.Apellido"
+                                + "\n4.Dirección" + "\n5.Móvil" + "\n6.Fecha de nacimiento" + "\n7.Salir");
+                        opc = Integer.parseInt(tc.readLine());
+
+                        while (opc < 1 || opc > 7) {
+                            System.out.println("Opción no valida, introducir de nuevo: ");
+                            opc = Integer.parseInt(tc.readLine());
+                        }
+                    } while (opc != 7);
+
+                    switch (opc) {
+                        case 1:
+                            System.out.println("Nueva ID: ");
+                            String ID = tc.readLine();
+
+                            while (isNum(ID) == false) {
+                                System.out.println("Error, introduce números: ");
+                                ID = tc.readLine();
+                            }
+                            agenda.get(opc).setId(ID);
+                            break;
+                        case 2:
+                            System.out.println("Nuevo Nombre: ");
+                            String name = tc.readLine();
+                            isLetra(name);
+                            agenda.get(opc).setName(name);
+                            break;
+                        case 3:
+                            System.out.print("Apellido: ");
+                            String surname = tc.readLine();
+                            isLetra(surname);
+                            agenda.get(opc).setSurname(surname);
+                            break;
+                        case 4:
+                            System.out.print("Dirección: ");
+                            String street = tc.readLine();
+                            agenda.get(opc).setStreet(street);
+                            break;
+                        case 5:
+                            System.out.print("Nuevo móvil: ");
+                            String phone = tc.readLine();
+                            while (isNum(phone) == false) {
+                                System.out.println("Error, introduce números: ");
+                                phone = tc.readLine();
+                            }
+                            agenda.get(opc).setPhone(phone);
+                            break;
+                        case 6:
+                            System.out.print("Nueva fecha de nacimiento en formato dd/MM/yyyy: ");
+                            String birthdate = tc.readLine();
+
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                            Date fecha = sdf.parse(birthdate);
+
+                            while (!sdf.format(fecha).equals(birthdate)) {
+                                System.out.println("Formato invalido: ");
+                                birthdate = tc.readLine();
+                                fecha = sdf.parse(birthdate);
+                            }
+                            agenda.get(opc).setBirthdate(fecha);
+                            break;
+                        case 7:
+                            break;
+                    }
                     break;
+
                 default:
-                    
+
                     break;
             }
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             System.out.println("Error al editar el contacto");
         }
     }
 
     public void search_contact() {
-         try {
-            
+        try {
+
         } catch (Exception e) {
             System.out.println("Error al buscar el contacto");
         }
@@ -219,7 +289,7 @@ public class gestionAgenda {
             int op;
             System.out.println("\nCómo quieres ordenar tu agenda?"
                     + "\n1.ID" + "\n2.Name" + "\nElige una opción: ");
-            
+
             op = Integer.parseInt(tc.readLine());
             while (op < 1 || op > 2) {
                 System.out.println("Introduce 1 o 2: ");
@@ -244,7 +314,6 @@ public class gestionAgenda {
 
     }
 
-    /*
     public void recuperar() {
         try {
             if (fichero.exists()) {
@@ -269,7 +338,7 @@ public class gestionAgenda {
             System.out.println("No se puede leer el fichero ");
         }
     }
-     */
+
     public void overwrite() {
         try {
             System.out.println("\nGuardando los datos en el fichero...");
@@ -481,14 +550,13 @@ public class gestionAgenda {
          return posicionDB;
      }
 }
-*/
-
+     */
 }
 
 class compare_id implements Comparator<contacto> {
-    
+
     @Override
-    public int compare(contacto p1, contacto p2){
+    public int compare(contacto p1, contacto p2) {
         return p1.getId().compareToIgnoreCase(p2.getId());
     }
 }
