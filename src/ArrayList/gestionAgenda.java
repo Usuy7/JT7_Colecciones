@@ -156,19 +156,49 @@ public class gestionAgenda {
 
             } while (aux != 'N');
         } catch (IOException | ParseException e) {
+            System.out.println("Error al añadir el nuevo contacto");
         }
     }
     
     public void edit_contact(){
-        
+        try {
+            System.out.println("\nIntroduce el ID del contacto que quieres editar: ");
+            String id = tc.readLine();
+            int cont = 0;
+            
+            for (int i = 0; i < agenda.size(); i++) {
+                if (agenda.get(i).getId().equalsIgnoreCase(id)) {
+                    System.out.println(agenda.get(i));
+                    cont++;
+                }
+            }
+            
+            switch (cont) {
+                case 0:
+                    System.out.println("\nID no encontrado");
+                    edit_contact();
+                    break;
+                case 1:
+                    
+                    break;
+                default:
+                    
+                    break;
+            }
+        } catch (IOException e) {
+            System.out.println("Error al editar el contacto");
+        }
     }
 
     public void search_contact() {
-
+         try {
+            
+        } catch (Exception e) {
+            System.out.println("Error al buscar el contacto");
+        }
     }
 
     public void delete_contact() {
-
         try {
             System.out.print("\nIntroduce el ID del contacto que quieres borrar: ");
             String id = tc.readLine();
@@ -180,8 +210,8 @@ public class gestionAgenda {
             }
 
         } catch (IOException e) {
+            System.out.println("Error al elminiar el contacto");
         }
-
     }
 
     public void sort_agenda() {
@@ -292,18 +322,6 @@ public class gestionAgenda {
     }
 
     /*
-    package Agenda;
-
-import Entidad.Contacto;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-
-
-
-public class MostrarDatos { 
-    
      public int buscarContacto(ArrayList c) throws IOException, ClassNotFoundException {
         
         ArrayList<Contacto> contactos = c;
