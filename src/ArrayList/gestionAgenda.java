@@ -41,16 +41,17 @@ public class gestionAgenda {
     public void start() throws IOException {
         int opc;
         do {
-            System.out.print("\n***GESTOR AGENDA***\n" + "1.Crear Contacto\n" + "2.Mostrar Contactos\n" + "3.Consultar Contactos\n"
-                    + "4.Eliminar Contacto\n" + "5.Ordenar Agenda\n" + "6.Buscar Cumpleaños\n" + "7.Salir\n" + "Elige una opción: ");
+            System.out.print("\n***GESTOR AGENDA***\n" + "1.Mostrar Contactos\n" + "2.Añadir Contacto\n" + "3.Editar Contacto\n"
+                  + "4.Consultar Contacto\n"  + "5.Eliminar Contacto\n" + "6.Ordenar Agenda\n" + "7.Buscar Cumpleaños\n" + "8.Salir\n" 
+                    + "Elige una opción: ");
             opc = Integer.parseInt(tc.readLine());
             validate(opc);
             menu(opc);
-        } while (opc != 7);
+        } while (opc != 8);
     }
 
     public void validate(int opc) throws IOException {
-        while (opc < 1 || opc > 7) {
+        while (opc < 1 || opc > 8) {
             System.out.println("Opción no valida, introducir de nuevo: ");
             opc = Integer.parseInt(tc.readLine());
             validate(opc);
@@ -67,20 +68,25 @@ public class gestionAgenda {
                 add_contact();
                 break;
             case 3:
-                search_contact();
+                edit_contact();
                 break;
             case 4:
-                delete_contact();
+                search_contact();
                 break;
             case 5:
-                sort_agenda();
+                delete_contact();
+                break;
             case 6:
-                search_birthday();
+                sort_agenda();
                 break;
             case 7:
+                search_birthday();
+                break;
+            case 8:
                 overwrite();
                 System.out.println("Bye Bye");
                 System.exit(0);
+                break;
         }
     }
 
@@ -151,6 +157,10 @@ public class gestionAgenda {
             } while (aux != 'N');
         } catch (IOException | ParseException e) {
         }
+    }
+    
+    public void edit_contact(){
+        
     }
 
     public void search_contact() {
@@ -292,60 +302,7 @@ import java.util.ArrayList;
 
 
 
-public class MostrarDatos {
-    
-    BufferedReader tec = new BufferedReader(new InputStreamReader(System.in));
-
-    public MostrarDatos() {
-   
-    }
-    
-    public Contacto añadirDatos() throws IOException{
-        
-         int id = 0;
-            String nombre;
-            String apellidos;
-            String telefono;
-            String fNacimiento;            
-    
-            System.out.println("Introduce el nombre:");
-            nombre = tec.readLine();
-            System.out.println("Introduce los apellidos:");
-            apellidos = tec.readLine();
-            System.out.println("Introduce el telefono:");
-            telefono = tec.readLine();
-            System.out.println("Introduce fecha de nacimiento en formato yyyy-MM-dd:");
-            fNacimiento = tec.readLine();
-            
-            Contacto contacto = new Contacto(id, nombre, apellidos, telefono, fNacimiento);
-        
-        return contacto;
-        
-    }
-
-    public void MostrarContactos(ArrayList c) {
-
-        ArrayList<Contacto> con = c;
-
-        int id;
-        String nombre, apellidos, telefono, fNacimiento;
-
-        System.out.println("------- CONTACTOS -------");
-
-        for (int i = 0; i < con.size(); i++) {
-
-            id = con.get(i).getId();
-            nombre = con.get(i).getNombre();
-            apellidos = con.get(i).getApellidos();
-            telefono = con.get(i).getTelefono();
-            fNacimiento = con.get(i).getfNacimiento();
-
-            System.out.println("-------------------------");
-            System.out.println("ID: " + id + "\nNombre: " + nombre + "\nApellidos: " + apellidos + "\nTelefono: " + telefono + "\nF.Nacimiento: " + fNacimiento);
-
-        }
-        System.out.println("\nHECHO!\n");
-    }
+public class MostrarDatos { 
     
      public int buscarContacto(ArrayList c) throws IOException, ClassNotFoundException {
         
