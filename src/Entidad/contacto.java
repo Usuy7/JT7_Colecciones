@@ -1,4 +1,4 @@
-package ArrayList;
+package Entidad;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
