@@ -504,88 +504,8 @@ public class gestionAgenda {
 
         return posicion;
     }
-     
-     
-     public int editarContacto(ArrayList c) throws IOException{
-         
-         ArrayList<Contacto> contact = c;
-         
-         int idEditar, posicionEditar = 0, posicionDB=0;
-         
-         String nombre, apellidos, telefono, fnac;
-         
-         System.out.println("Indica la ID del contacto que quieras editar");
-         
-         idEditar = Integer.parseInt(tec.readLine());
-         
-         for (int i = 0; i < contact.size(); i++) {
-             
-             if (contact.get(i).getId() == idEditar) { 
-                 
-                posicionEditar = i; //editar en array
-                posicionDB = contact.get(i).getId(); //editar en DB
-             
-            }
-         }
-         
-         System.out.println("\nVas a editar el siguiente contacto: ");
-         System.out.println(contact.get(posicionEditar).toString());
-         
-         int opcion;
-            do{
-                do{
-            System.out.println("¿Qué quieres editar? Elige una opción");
-            System.out.println("1 = Nombre");
-            System.out.println("2 = Apellidos");
-            System.out.println("3 = Telefono");
-            System.out.println("4 = FechaNacimiento");
-            System.out.println("5 = SALIR");
-            
-            opcion = Integer.parseInt(tec.readLine());
-            
-            if(opcion<1 || opcion>5){
-                System.out.println("ERROR, introduce una opción válida");
-            }   
-                }while(opcion<1 || opcion>5);
-            
-            
-               switch (opcion){
-               
-                   case 1:
-                       System.out.println("Nuevo nombre: ");
-                       nombre = tec.readLine();
-                       contact.get(posicionEditar).setNombre(nombre);
-                       break;
-                       
-                       
-                   case 2:
-                       System.out.println("Nuevos apellidos: ");
-                       apellidos = tec.readLine();
-                       contact.get(posicionEditar).setApellidos(apellidos);
-                       break;
-                       
-                   case 3:
-                       System.out.println("Nuevo teléfono: ");
-                       telefono = tec.readLine();
-                       contact.get(posicionEditar).setTelefono(telefono);
-                       
-                       break;
-                       
-                   case 4:
-                       System.out.println("Nueva F.Nacimiento: ");
-                       fnac = tec.readLine();
-                       contact.get(posicionEditar).setfNacimiento(fnac);
- 
-                       break;
-
-               }                
-            
-            }while(opcion!=5);
-
-         return posicionDB;
-     }
 }
-     */
+*/
 }
 
 class compare_id implements Comparator<contacto> {
