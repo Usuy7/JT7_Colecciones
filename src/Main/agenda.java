@@ -1,5 +1,6 @@
-package ArrayList;
+package Main;
 
+import Entity.contacto;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,17 +26,17 @@ import java.util.logging.Logger;
  *
  * @author Javi
  */
-public class gestionAgenda {
+public class agenda {
 
     public static void main(String[] args) throws IOException {
-        new gestionAgenda();
+        new agenda();
     }
 
     static BufferedReader tc = new BufferedReader(new InputStreamReader(System.in));
     static File fichero = new File("Agenda.txt");
     static ArrayList<contacto> agenda = new ArrayList<contacto>();
 
-    public gestionAgenda() throws IOException {
+    public agenda() throws IOException {
         //recuperar();
         start();
     }
