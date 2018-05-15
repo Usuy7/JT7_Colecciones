@@ -10,7 +10,7 @@ public class conexion {
 
     Connection conex;
 
-    public Connection AbrirConexion() throws ClassNotFoundException {
+    public Connection open_Conexion() throws ClassNotFoundException {
 
         try {
             Class.forName("com.mysql.jdbc.Driver"); //DRIVER
@@ -28,7 +28,7 @@ public class conexion {
         return conex;
     }
 
-    public void CerrarConexion() {
+    public void close_Conexion() {
 
         if (conex != null) {
             try {
