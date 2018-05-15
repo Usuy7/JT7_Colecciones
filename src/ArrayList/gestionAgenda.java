@@ -187,7 +187,7 @@ public class gestionAgenda {
 
                 default:
 
-                    System.out.println("\nHay " + cont + " contactos con este nombre..."
+                    System.out.println("\nHay " + cont + " contactos con esta ID..."
                             + "\nIntroduzca el nombre del contacto a editar...");
                     String name = tc.readLine();
 
