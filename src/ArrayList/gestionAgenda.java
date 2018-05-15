@@ -166,93 +166,128 @@ public class gestionAgenda {
         try {
             System.out.println("\nIntroduce el ID del contacto que quieres editar: ");
             String id = tc.readLine();
-            int cont = 0, pos = 0;
+            int cont = 0, pos_id = 0, pos_name = 0;
 
             for (int i = 0; i < agenda.size(); i++) {
                 if (agenda.get(i).getId().equalsIgnoreCase(id)) {
                     cont++;
-                    pos = i;
+                    pos_id = i;
                 }
             }
 
             switch (cont) {
                 case 0:
-                    System.out.println("\nID no encontrado");
+                    System.out.println("\nID no encontrado..");
                     edit_contact();
                     break;
 
                 case 1:
-                    System.out.println("\nVas a editar este contacto: " + "\n" + agenda.get(pos).toString());
-                    int opc;
-                    do {
-                        System.out.println("\nElija el campo a editar: " + "\n1.ID" + "\n2.Nombre" + "\n3.Apellido"
-                                + "\n4.Dirección" + "\n5.Móvil" + "\n6.Fecha de nacimiento" + "\n7.Salir");
-                        opc = Integer.parseInt(tc.readLine());
-
-                        while (opc < 1 || opc > 7) {
-                            System.out.println("Opción no valida, introducir de nuevo: ");
-                            opc = Integer.parseInt(tc.readLine());
-                        }
-                    } while (opc != 7);
-
-                    switch (opc) {
-                        case 1:
-                            System.out.println("Nueva ID: ");
-                            String ID = tc.readLine();
-
-                            while (isNum(ID) == false) {
-                                System.out.println("Error, introduce números: ");
-                                ID = tc.readLine();
-                            }
-                            agenda.get(opc).setId(ID);
-                            break;
-                        case 2:
-                            System.out.println("Nuevo Nombre: ");
-                            String name = tc.readLine();
-                            isLetra(name);
-                            agenda.get(opc).setName(name);
-                            break;
-                        case 3:
-                            System.out.print("Apellido: ");
-                            String surname = tc.readLine();
-                            isLetra(surname);
-                            agenda.get(opc).setSurname(surname);
-                            break;
-                        case 4:
-                            System.out.print("Dirección: ");
-                            String street = tc.readLine();
-                            agenda.get(opc).setStreet(street);
-                            break;
-                        case 5:
-                            System.out.print("Nuevo móvil: ");
-                            String phone = tc.readLine();
-                            while (isNum(phone) == false) {
-                                System.out.println("Error, introduce números: ");
-                                phone = tc.readLine();
-                            }
-                            agenda.get(opc).setPhone(phone);
-                            break;
-                        case 6:
-                            System.out.print("Nueva fecha de nacimiento en formato dd/MM/yyyy: ");
-                            String birthdate = tc.readLine();
-
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                            Date fecha = sdf.parse(birthdate);
-
-                            while (!sdf.format(fecha).equals(birthdate)) {
-                                System.out.println("Formato invalido: ");
-                                birthdate = tc.readLine();
-                                fecha = sdf.parse(birthdate);
-                            }
-                            agenda.get(opc).setBirthdate(fecha);
-                            break;
-                        case 7:
-                            break;
-                    }
+                    edition(pos_id);
                     break;
 
                 default:
 
+                    System.out.println("\nHay " + cont + " contactos con este nombre..."
+                            + "\nIntroduzca el nombre del contacto a editar...");
+                    String name = tc.readLine();
+
+                    for (int i = 0; i < agenda.size(); i++) {
+
+                        if (agenda.get(i).getName().equalsIgnoreCase(name)) {
+                            pos_name = i;
+                        } else {
+                            System.out.println("No se ha encontrado ese nombre..");
+                            edit_contact();
+                        }
+                    }
+                    edition(pos_name);
+                    break;
+            }
+        } catch (IOException e) {
+            System.out.println("Error al editar el contacto");
+        }
+    }
+
+    public void edition(int pos) {
+        try {
+            System.out.println("\nVas a editar este contacto: " + "\n" + agenda.get(pos).toString());
+            int opc;
+            do {
+                System.out.println("\nElija el campo a editar: " + "\n1.ID" + "\n2.Nombre" + "\n3.Apellido"
+                        + "\n4.Dirección" + "\n5.Móvil" + "\n6.Fecha de nacimiento" + "\n7.Salir");
+                opc = Integer.parseInt(tc.readLine());
+
+                while (opc < 1 || opc > 7) {
+                    System.out.println("Opción no valida, introducir de nuevo: ");
+                    opc = Integer.parseInt(tc.readLine());
+                }
+            } while (opc != 7);
+
+            switch (opc) {
+                case 1:
+                    System.out.println("New ID: ");
+                    String ID = tc.readLine();
+
+                    while (isNum(ID) == false) {
+                        System.out.println("Error, introduce números: ");
+                        ID = tc.readLine();
+                    }
+                    agenda.get(opc).setId(ID);
+                    System.out.println("***ID actualizado***");
+                    break;
+
+                case 2:
+                    System.out.println("New Name: ");
+                    String name = tc.readLine();
+                    isLetra(name);
+                    agenda.get(opc).setName(name);
+                    System.out.println("***Nombre actualizado***");
+                    break;
+
+                case 3:
+                    System.out.print("New Surname: ");
+                    String surname = tc.readLine();
+                    isLetra(surname);
+                    agenda.get(opc).setSurname(surname);
+                    System.out.println("***Apellido actualizado***");
+                    break;
+
+                case 4:
+                    System.out.print("New Street: ");
+                    String street = tc.readLine();
+                    agenda.get(opc).setStreet(street);
+                    System.out.println("***Dirección actualizada***");
+                    break;
+
+                case 5:
+                    System.out.print("New Phone: ");
+                    String phone = tc.readLine();
+
+                    while (isNum(phone) == false) {
+                        System.out.println("Error, introduce números: ");
+                        phone = tc.readLine();
+                    }
+                    agenda.get(opc).setPhone(phone);
+                    System.out.println("***Móvil actualizado***");
+                    break;
+
+                case 6:
+                    System.out.print("New Birthdate dd/MM/yyyy: ");
+                    String birthdate = tc.readLine();
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    Date fecha = sdf.parse(birthdate);
+
+                    while (!sdf.format(fecha).equals(birthdate)) {
+                        System.out.println("Formato invalido: ");
+                        birthdate = tc.readLine();
+                        fecha = sdf.parse(birthdate);
+                    }
+                    agenda.get(opc).setBirthdate(fecha);
+                    System.out.println("***Fecha de nacimiento actualizada***");
+                    break;
+
+                case 7:
                     break;
             }
         } catch (IOException | ParseException e) {
