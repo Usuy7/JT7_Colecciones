@@ -347,7 +347,6 @@ public class agenda {
     }
 
     public void search_birthday() {
-
     }
 
     public void recuperar() {
@@ -509,7 +508,7 @@ public class agenda {
 */
 }
 
-class compare_id implements Comparator<contacto> {
+class compare_id implements Comparator <contacto> {
 
     @Override
     public int compare(contacto p1, contacto p2) {
@@ -517,7 +516,7 @@ class compare_id implements Comparator<contacto> {
     }
 }
 
-class compare_name implements Comparator<contacto> {
+class compare_name implements Comparator <contacto> {
 
     @Override
     public int compare(contacto p1, contacto p2) {
