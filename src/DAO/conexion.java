@@ -6,11 +6,11 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Conexion {
+public class conexion {
 
     Connection conex;
 
-    public Connection AbrirConexion() throws ClassNotFoundException {
+    public Connection open_Conexion() throws ClassNotFoundException {
 
         try {
             Class.forName("com.mysql.jdbc.Driver"); //DRIVER
@@ -21,21 +21,21 @@ public class Conexion {
             conex = DriverManager.getConnection(url, user, pass);           
 
         } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("ERROR EN LA CONEXION CON BBDD");
         }
 
         return conex;
     }
 
-    public void CerrarConexion() {
+    public void close_Conexion() {
 
         if (conex != null) {
             try {
                 conex.close();
                 
             } catch (SQLException ex) {
-                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
