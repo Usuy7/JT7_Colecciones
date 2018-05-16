@@ -44,17 +44,23 @@ public class agenda {
     public void start() throws IOException {
         int opc;
         do {
-            System.out.print("\n***GESTOR AGENDA***\n" + "1.Mostrar Contactos\n" + "2.Añadir Contacto\n" + "3.Editar Contacto\n"
-                    + "4.Consultar Contacto\n" + "5.Eliminar Contacto\n" + "6.Ordenar Agenda\n" + "7.Buscar Cumpleaños\n" + "8.Salir\n"
-                    + "Elige una opción: ");
+            System.out.print("\n***AGENDA MANAGER***\n"
+                                + "1.Show\n" 
+                                + "2.New\n" 
+                                + "3.Update\n"
+                                + "4.Select\n" 
+                                + "5.Delete\n" 
+                                + "6.Sort\n" 
+                                + "7.Salir\n"
+                                + "Choose an option: ");
             opc = Integer.parseInt(tc.readLine());
             validate(opc);
             menu(opc);
-        } while (opc != 8);
+        } while (opc != 7);
     }
 
     public void validate(int opc) throws IOException {
-        while (opc < 1 || opc > 8) {
+        while (opc < 1 || opc > 7) {
             System.out.println("Opción no valida, introducir de nuevo: ");
             opc = Integer.parseInt(tc.readLine());
             validate(opc);
@@ -86,8 +92,6 @@ public class agenda {
                 search_birthday();
                 break;
             case 8:
-                overwrite();
-                System.out.println("Bye Bye");
                 System.exit(0);
                 break;
         }
