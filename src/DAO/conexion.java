@@ -3,6 +3,8 @@ package DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class conexion {
     
@@ -33,8 +35,12 @@ public class conexion {
     
     public void desconectar_BDD(){
         if (conexion != null){
-            if (!conexion.isClosed()){
-                conexion.close();
+            try {
+                if (!conexion.isClosed()){
+                    conexion.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
