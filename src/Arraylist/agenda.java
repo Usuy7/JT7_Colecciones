@@ -1,6 +1,5 @@
-package Main;
+package Arraylist;
 
-import Entity.contacto;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
